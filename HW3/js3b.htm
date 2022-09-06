@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Timer</title>
+    <style>
+        body {background-color: #064b5f;}
+        button {border: none; border-radius: 6px; padding: 15px 20px; font: 1.2em sans-serif; color: #fff;}
+        #watch {width: 60%; margin: auto; text-align: center; padding: 40px 10px; font: 2em sans-serif; color: #908e8e; border-radius: 13px; background-color: #fff; }
+        .container { background-color: #002a36; text-align: center; padding: 50px 0; width: 40%; border-radius: 13px; min-width: 400px; position: fixed; top: 30%;left: 30%;}
+        .btns {padding: 30px 0 0 0;}
+        .gray {background-color: #415357;}
+        .red {background-color: #cb4b16;}
+        .blue {background-color: #29a199;}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="watch"> 00 : 00 : 00</div>
+        <div class="btns">
+            <button class="gray" onclick="start()">Start</button>
+            <button class="red" onclick="stop()">Stop</button>
+            <button class="blue" onclick="reset()">Resume</button>
+        </div>
+    </div>
+
+    <script>
+        const watch = document.getElementById("watch");
+        let msec = 0;
+        let sec = 0;
+        let min = 0;
+        let timer = null;
+
+        function start() {
+            if (timer != null)
+                clearInterval(timer)
+
+            timer = setInterval(displayTimer, 10);
+        }
+        function stop() {
+            clearInterval(timer);
+        }
+        function reset() {
+            clearInterval(timer);
+            msec = 0;
+            sec = 0;
+            min = 0;
+            watch.innerHTML = "00 : 00 : 00";
+        }
+
+        function displayTimer() {
+            msec += 1;
+            if (msec == 100) {
+                msec = 0;
+                sec++;
+                if (sec == 60) {
+                    sec = 0;
+                    min++;
+                    if (min == 60) {
+                        min = 0;
+                    }
+                }
+            }
+            let m = min < 10 ? "0" + min : min;
+            let s = sec < 10 ? "0" + sec : sec;
+            let ms = msec < 10 ? "0" + msec : msec;
+            watch.innerHTML = `${m} : ${s} : ${ms}`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>jQuery</title>
+    </head>
+    <style>
+        body { margin: 0; }
+
+        #window{
+            width: 45%;
+            margin: auto;
+            
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+        }
+
+        #inputs { 
+            background-color: #14a59b;
+            padding: 20px 30px;
+        }
+        #inputs *{
+            text-align: center;
+            background-color: #fff;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+        }
+        textarea, input, select { outline: none }
+        button,input,select{border-radius: 10px;}
+        #text { 
+            height: 300px;
+            padding: 10px 35px;
+            font-size: 24px Arial;
+        }
+
+
+        .bold { font-weight: bold!important }
+        .italic { font-style: italic!important }
+        .underline { text-decoration: underline!important }
+        .selected { background: #dcd7d7!important }
+    </style>
+    <body>
+        <div id="window">
+        <div id="container">
+            <div id="inputs">
+                <button value="bold"><b>Bold</b></button>
+                <button value="italic"><i>Italic</i></button>
+                <button value="underline"><u>Underline</u></button>
+                <input name="color" type="color" />
+                <select id="select"></select>
+                <input name="fontSize" type="number" min="12" max="45" value="24" />
+            </div>
+            <textarea id="text"></textarea>
+        </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            const text = $("#text")
+            const select = $("#select")
+            var fonts = ["Arial", "Verdana", "Helvetica", "Tahoma", "Trebuchet MS", "Times New Roman", "Georgia", "Garamond", "Courier New", "Brush Script MT"]
+            
+            fonts.forEach((font) => {
+                select.append(`<option>${font}</option>`)
+            })
+
+            $("button").click(function() {
+                const val = $(this).val()
+                text.toggleClass(val)
+                $(this).toggleClass("selected")
+            })
+
+            $("input").change(function() {
+                let val = $(this).val();
+                if(!isNaN(val)) val += "px"
+                text.css($(this).attr('name'), val)
+            })
+
+            select.change(function() {
+                const val = select.val() 
+                text.css("font-family", val)
+            })
+
+        </script>
+    </body>
+</html>

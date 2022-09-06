@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>HW2-b</title>
+        <style>
+            div {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            table {
+                border-collapse: collapse;
+                margin: 2em;
+            }
+
+            td {
+                width: 40px;
+                height: 40px;
+                border: 3px solid #333;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <table id="cedvel1"></table>
+            <table id="cedvel2"></table>
+            <table id="cedvel3"></table>
+            <table id="cedvel4"></table>
+            <table id="cedvel5"></table>
+            <table id="cedvel6"></table>
+        </div>
+        <table id="cedvel7"></table>
+
+        <script>
+            const cedvel1 = document.getElementById("cedvel1")
+            const cedvel2 = document.getElementById("cedvel2")
+            const cedvel3 = document.getElementById("cedvel3")
+            const cedvel4 = document.getElementById("cedvel4")
+            const cedvel5 = document.getElementById("cedvel5")
+            const cedvel6 = document.getElementById("cedvel6")
+            const cedvel7 = document.getElementById("cedvel7")
+
+            //Table-1
+            let kod1 = ''
+            for (let i = 0; i < 4; i++) {
+                kod1 += '<tr>'
+                for (let j = 0; j < 4; j++) {
+                    kod1 += i * j == 0 || i == 3 || j == 3 ? '<td style="background-color: greenyellow;"></td>' : '<td></td>'
+                }
+                kod1 += '</tr>'
+            }
+            cedvel1.innerHTML = kod1
+
+            //Table-2
+            let kod2 = ''
+            for (let i = 0; i < 4; i++) {
+                kod2 += '<tr>'
+                for (let j = 0; j < 4; j++) {
+                    kod2 += !(j % 2) ? '<td style="background-color: greenyellow;"></td>' : '<td></td>'
+                }
+                kod2 += '</tr>'
+            }
+            cedvel2.innerHTML = kod2
+
+            //Table-3
+            let kod3 = ''
+            for (let i = 0; i < 4; i++) {
+                kod3 += '<tr>'
+                for (let j = 0; j < 4; j++) {
+                    kod3 += !((i + j) % 2) ? '<td style="background-color: greenyellow;"></td>' : '<td></td>'
+                }
+                kod3 += '</tr>'
+            }
+            cedvel3.innerHTML = kod3
+
+            //Table-4
+            let kod4 = ''
+            for (let i = 0; i < 4; i++) {
+                kod4 += '<tr>'
+                for (let j = 0; j < 4; j++) {
+                    kod4 += j - i >= 0 ? '<td style="background-color: greenyellow;"></td>' : '<td></td>'
+                }
+                kod4 += '</tr>'
+            }
+            cedvel4.innerHTML = kod4
+
+            //Table-5
+            let kod5 = ''
+            for (let i = 0; i < 4; i++) {
+                kod5 += '<tr>'
+                for (let j = 0; j < 4; j++) {
+                    kod5 += i % 2 ? '<td style="background-color: greenyellow;"></td>' : '<td></td>'
+                }
+                kod5 += '</tr>'
+            }
+            cedvel5.innerHTML = kod5
+
+            //Table-6
+            let kod6 = ''
+            for (let i = 0; i < 4; i++) {
+                kod6 += '<tr>'
+                for (let j = 0; j < 4; j++) {
+                    kod6 += i + j <= 3 ? '<td style="background-color: greenyellow;"></td>' : '<td></td>'
+                }
+                kod6 += '</tr>'
+            }
+            cedvel6.innerHTML = kod6
+
+            //Table-7
+            let kod7 = ''
+            for (let i = 0; i < 8; i++) {
+                kod7 += '<tr>'
+                for (let j = 0; j < 8; j++) {
+                    kod7 += (i + j >= 7 && i - j >= 0) || (i + j <= 7 && j - i >= 0) ? '<td style="background-color: greenyellow;"></td>' : '<td></td>'
+                }
+                kod7 += '</tr>'
+            }
+            cedvel7.innerHTML = kod7
+        </script>
+    </body>
+</html>

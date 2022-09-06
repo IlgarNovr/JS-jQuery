@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Game</title>
+        <style>
+            #cedvel{
+                border-collapse: collapse; margin: auto
+            }
+            td{
+                height: 60px;
+                width: 60px;
+                text-align: center;
+                border: 5px solid #333;
+                font: bold 1.5em sans-serif;
+            }
+            .black { color: yellow!important; background-color: black!important; font: 1.5em sans-serif;}
+        </style>
+    </head>
+    <body>
+        <table id="cedvel">
+            <caption>10</caption>
+        </table>
+
+        <script>
+            const table = document.getElementById('cedvel')
+            let kod = ''
+            let n = 1
+            let sec = 10
+            let arr = []
+            for (let i = 1; i <= 16; i++) {
+                arr.push(i)
+            }
+            for(let i = 0; i < 4; i++){
+                kod += '<tr>';
+                    for (let j = 0; j < 4; j++) {
+                        let x = rand(0, arr.length - 1);
+                        kod += '<td ' + ((i == 1 || i == 2 ) ? 'id="over"' : '') + `onclick="klik(this)">${arr[x]}</td>`
+                        arr.splice(x, 1)
+                    }
+                kod += '</tr>';
+            }
+
+            table.innerHTML += kod;
+            let counter = setInterval(timer,1000)
+
+            function klik(td) {
+                if (td.innerHTML == n) {
+                    td.style = 'background : #555; color: #999';
+                    if (n < 16) n++
+                    else gameOver(1)
+                }
+            }
+
+            function timer() {
+                if (sec >= 0)
+                    document.getElementsByTagName("caption")[0].innerHTML = sec--
+                else gameOver(0)
+            }
+
+            function yellow() {
+                const setir = document.querySelectorAll('#over')
+                let index = 0
+                const gover = "GAMEOVER".split('')
+                for(td of setir) {
+                    td.classList.add('black');
+                    td.textContent = gover[index++]
+                }
+            }
+
+            function gameOver(netice) {
+                clearInterval(counter)  
+                netice ? '' : yellow() 
+                alert( netice ? "TEBRIKLER ! UDDUN !" : "UDUZDUN !!!! " )
+            }
+
+            function rand(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+        </script>
+    </body>
+</html>

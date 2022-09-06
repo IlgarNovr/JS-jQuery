@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>HW2-a</title>
+
+        <style>
+            input {width: 3em;}
+        </style>
+    </head>
+
+    <body>
+        <p><b>Kvadrat tənlik</b></p>
+        <input id="a" type="number">X<sup>2</sup> +
+        <input id="b" type="number">X +
+        <input id="c" type="number"> = 0
+        <button onclick="calc()"> CALC </button>
+        <p id="is_true">✅Tənliyin kökləri: </p>
+        X<sub>1</sub> = <span id="x1"></span><br />
+        X<sub>2</sub> = <span id="x2"></span>
+
+        <script>
+            const a = document.getElementById("a")
+            const b = document.getElementById("b")
+            const c = document.getElementById("c")
+            const x1 = document.getElementById("x1")
+            const x2 = document.getElementById("x2")
+            const is_true = document.getElementById("is_true")
+
+            function calc() {
+                let disc = b.value * b.value - 4 * a.value * c.value
+
+                x1.innerHTML = (disc > 0 ? ((-b.value + Math.sqrt(disc)) / (2 * a.value)).toPrecision(2) :
+                                disc == 0 ? (-b.value / (2 * a.value)).toPrecision(2) : '❗')
+
+                x2.innerHTML = (disc > 0 ? ((-b.value - Math.sqrt(disc)) / (2 * a.value)).toPrecision(2) :
+                                disc == 0 ? -b.value / (2 * a.value) : '❗')
+
+                is_true.innerHTML = disc < 0 ? '❌Tənliyin həqiqi kökü yoxdur!' : '✅Tənliyin kökləri'
+            }
+        </script>
+    </body>
+
+</html>

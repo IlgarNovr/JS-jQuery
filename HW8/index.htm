@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <style>
+            *{ box-sizing: border-box;}
+            body { margin: 0 }
+            #puzzle { width: 800px; height: 600px; box-shadow: 0 0 10px #666; position: relative }
+            #puzzle > div { position: absolute; width: 100px; height: 100px; box-shadow: 0 0 5px #333; }
+      </style>
+    </head>
+    <body>
+        <div id="puzzle"></div>
+        <button id="endbtn">End</button>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        <script>
+            $(()=>{
+                const puzzle = $("#puzzle")
+                for(let row = 0; row < 6; row++) {
+                    for(let col = 0; col < 8; col++) {
+                        puzzle.append('<div></div>')
+                        puzzle.children().last().css({
+                            top: rand(0, 600) + 'px',
+                            left: rand(800, $(window).width() - 170 ) + 'px',
+                            transform: `rotate(${rand(-45, 45)}deg)`,
+                            background: `url('img/cartoon.webp') ${-100 * col}px ${-100 * row}px`,
+
+                        })
+                    }
+                }
+
+                puzzle.children().draggable({
+                    snap: puzzle.children(),
+                    start: function() {
+                        $(this).css({ transform: 'rotate(0deg)', zIndex: 99 })
+                    },
+                    drag: function() {
+                    },
+                    stop: function() {
+                        $(this).css({ 
+                            left : `${100 * Math.round( $(this).position().left / 100)}px`,
+                            top : `${100 * Math.round( $(this).position().top / 100)}px`,
+                            boxShadow: 'none',
+                            zIndex: 1
+                        })
+                        isGameOver()
+                    }
+                })
+
+                function rand(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1) ) + min;
+                }
+
+                function isGameOver() {
+                    for (let i = 0; i < puzzle.children().length; i++) {
+                        let child = puzzle.children().eq(i).position()
+                        let pos = puzzle.children().eq(i).css("backgroundPosition").split(" ")
+                        if(child.top !== parseInt(pos[1]) * -1 ||
+                           child.left !== parseInt(pos[0]) * -1 )
+                            return false
+                    }
+                    gameover()
+                }
+
+                function gameover() {
+                    puzzle.css({
+                        font: "5em Arial",
+                        color: "blue",
+                        background: "black",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    })
+                    .text("You Win")
+                    .children().remove()
+                    $(".btn").prop('disabled', true)
+                }
+
+                $("#endbtn").click(function end() {
+                    for (let i = 0; i < puzzle.children().length - 1; i++) {
+                        let pos = puzzle.children().eq(i).css("backgroundPosition").split(" ") 
+                        puzzle.children().eq(i).css({
+                            transform: 'rotate(0deg)',
+                            boxShadow: 'none',
+                            top: parseInt(pos[1]) * -1,
+                            left: parseInt(pos[0]) * -1
+                        })
+                    }
+                })
+            })
+        </script>
+    </body>
+</html>

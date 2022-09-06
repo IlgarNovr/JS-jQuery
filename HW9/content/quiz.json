@@ -1,0 +1,114 @@
+{
+    "title": "Qarışıq suallar",
+    "question": [
+        {
+            "q": "Hansı heyvanın qırılan sümüyü qaynamır?",
+            "a": [
+                "Dələ",
+                "Meymun",
+                "Pişik",
+                "At",
+                "Zürafə"
+            ],
+            "t": 3
+        },
+        {
+            "q": "İnsandan başqa digər hansı canlı zövq üçün cinsi əlaqədə olur?",
+            "a": [
+                "Timsah",
+                "Ayı",
+                "Delfin",
+                "İt",
+                "Meymun"
+            ],
+            "t": 2
+        },
+        {
+            "q": "4 ədəd dizi olan yeganə heyvan hansıdır?",
+            "a": [
+                "Ayı",
+                "Zürafə",
+                "Fil",
+                "Dələ",
+                "Ceyran"
+            ],
+            "t": 2
+        },
+        {
+            "q": "Uşaqlar hansı fəsildə daha çox böyüyür?",
+            "a": [
+                "Fərqi yoxdur",
+                "Payız",
+                "Yaz",
+                "Qış",
+                "Yay"
+            ],
+            "t": 4
+        },
+        {
+            "q": "Bütün iqlimlərin yaşandığı yeganə ölkə?",
+            "a": [
+                "ABŞ",
+                "Nigerya",
+                "Kanada",
+                "Brazilya",
+                "Yeni Zellandiya"
+            ],
+            "t": 0
+        },
+        {
+            "q": "İl ərzində bir dəfədə olsa insan doğulmayan yeganə ölkə hansıdır?",
+            "a": [
+                "Vyetnam",
+                "Malaziya",
+                "Tayland",
+                "Vatikan"
+            ],
+            "t": 3
+        },
+        {
+            "q": "Təyyarələrin qara qutusu hansı rəngdə olur?",
+            "a": [
+                "Mavi",
+                "Qırmızı",
+                "Ağ",
+                "Narıncı",
+                "Qara"
+            ],
+            "t": 3
+        },
+        {
+            "q": "Dünyanın ən uzun Çayı hansıdır?",
+            "a": [
+                "Panama",
+                "Amazon",
+                "Kür",
+                "Nil",
+                "Volqa"
+            ],
+            "t": 3
+        },
+        {
+            "q": "İnsan bədənində ömür boyu inkişaf edən orqan?",
+            "a": [
+                "Böyrək",
+                "Burun",
+                "Göz",
+                "Dalaq",
+                "Barmaq"
+            ],
+            "t": 1
+        },
+        {
+            "q": "Ən çox susuz qala bilən heyvan?",
+            "a": [
+                "Fil",
+                "Siçovul",
+                "Dəvə",
+                "At",
+                "Zürafə"
+            ],
+            "t": 2
+        }
+    ]
+}

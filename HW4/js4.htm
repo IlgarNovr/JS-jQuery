@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            #game {margin: 50px auto; box-shadow: 0 0 10px #333; position: relative }
+            #game div { position: absolute }
+        </style>
+    </head>
+    <body>
+        <div id="game"></div>
+
+        <script>
+            const game = {
+                w: 800,
+                h: 600,
+                color: "#fff",
+                show() {
+                    this.elem = document.getElementById("game")
+                    this.elem.style.width = this.w + "px"
+                    this.elem.style.height = this.h + "px"
+                    this.elem.style.background = this.color
+                },
+                create() {
+                    let div = document.createElement("div")
+                    div.id = "game"
+                    document.body.append(div)
+                    this.show()
+                },
+                over() {
+                    clearInterval(start)
+                    this.elem.innerHTML = "GAME OVER !!!!"
+                    this.color = "#000"
+                    this.show()
+                    this.elem.style.display = "flex"
+                    this.elem.style.justifyContent = "center"
+                    this.elem.style.alignItems = "center"
+                    this.elem.style.font = "bold 5em Arial"
+                    this.elem.style.color = "yellow"
+                }
+            }
+            const ball = {
+                w: 30,
+                h: 30,
+                color: 'red',
+                x: 0,
+                y: 0,
+                dx: 20,
+                dy: 5,
+                move() {
+                    if( ball.x < 0 || ball.x > 770) ball.dx *= -1
+                    if( ball.y < 0 || 
+                        ball.y > 555 && ball.x + 15 > bar1.x && ball.x + 15 < bar1.x + 150) ball.dy *= -1
+                    if (ball.y > 570) game.over()
+                    ball.x += ball.dx
+                    ball.y += ball.dy
+                    ball.show()
+                },
+                show(state = 0) {
+                    if(state){
+                        ball.elem = document.getElementById("ball")
+                        ball.elem.style.width = ball.w + "px"
+                        ball.elem.style.height = ball.h + "px"
+                        ball.elem.style.borderRadius = '50%'
+                        ball.elem.style.background = ball.color
+                    }
+                    ball.elem.style.left = ball.x + "px"
+                    ball.elem.style.top = ball.y + "px"
+                },
+                create() {
+                    let div = document.createElement("div")
+                    div.id = "ball"
+                    game.elem.append(div)
+                    this.show(1)
+                }
+            }
+            const bar1 = {
+                x: 5,
+                y: 0,
+                w: 10,
+                h: 150,
+                color: 'blue',
+                move(e) {
+                    if(e.type == 'keydown') {
+                        if(e.keyCode == 40) bar1.y -= 10
+                        if(e.keyCode == 38) bar1.y += 10
+                    } 
+                    if (bar1.y < 0) bar1.y = 0
+                    if (bar1.y > 450) bar1.y = 450
+                    bar1.show()
+                },
+                show() {
+                    bar1.elem = document.getElementById("bar1")
+                    bar1.elem.style.width = bar1.w + "px"
+                    bar1.elem.style.height = bar1.h + "px"
+                    bar1.elem.style.background = bar1.color
+                    bar1.elem.style.left = bar1.x + "px"
+                    bar1.elem.style.bottom = bar1.y + "px"
+                },
+                create() {
+                    let div = document.createElement("div")
+                    div.id = "bar1"
+                    game.elem.append(div)
+                    this.show()
+                }
+            }
+
+            const bar2 = {
+                x: 785,
+                y: 0,
+                w: 10,
+                h: 150,
+                color: 'blue',
+                move(e) {
+                    if(e.type == 'keydown') {
+                        if(e.keyCode == 83) bar2.y -= 10
+                        if(e.keyCode == 87) bar2.y += 10
+                    } 
+                    if (bar2.y < 0) bar2.y = 0
+                    if (bar2.y > 450) bar2.y = 450
+                    bar2.show()
+                },
+                show() {
+                    bar2.elem = document.getElementById("bar2")
+                    bar2.elem.style.width = bar2.w + "px"
+                    bar2.elem.style.height = bar2.h + "px"
+                    bar2.elem.style.background = bar2.color
+                    bar2.elem.style.left = bar2.x + "px"
+                    bar2.elem.style.bottom = bar2.y + "px"
+                },
+                create() {
+                    let div = document.createElement("div")
+                    div.id = "bar2"
+                    game.elem.append(div)
+                    this.show()
+                }
+            }
+
+            
+
+            game.create()
+            ball.create()
+            bar1.create()
+            bar2.create()
+            let start = setInterval(ball.move, 40)
+            document.onkeydown = bar1.move
+            document.onkeydown = bar2.move
+            game.elem.onmousemove = bar1.move
+            game.elem.onmousemove = bar2.move
+
+        </script>
+    </body>
+</html>

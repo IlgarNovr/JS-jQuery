@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            class CssClass {
+                constructor(name) {
+                    this.name = name;
+                    this.styles = [];
+                }
+                addStyle(style) {
+                    if(Array.isArray(style))
+                        this.styles.push(...style);
+                    else
+                        this.styles.push(style);
+                    
+                }
+
+                removeStyle(style) {
+                    let index = this.styles.indexOf(style);
+                    if(index >= 0)
+                        this.styles.splice(index, 1);
+                }
+
+                init() {
+                    let code = '.' + this.name + '{';
+                    code += this.styles.join("; ");
+                    code += ';}';
+                    this.elem = code;
+                }
+
+                create() {
+                    let style = document.getElementsByTagName("style")[0];
+                    if(!style) {
+                        style = document.createElement("style");
+                        document.head.appendChild(style);
+                    }
+                    this.init();
+                    style.innerHTML += this.elem;
+                }
+                getCss() {
+                    return this.code;
+                }
+            }
+
+            class HtmlElement {
+                constructor(name, selfClosing, text = '') {
+                    this.name = name;
+                    this.selfClosing = selfClosing;
+                    this.attrs = [];
+                    this.styles = [];
+                    this.text = text;
+                }
+
+                addAttr(attr) {
+                    if(Array.isArray(attr))
+                        this.attrs.push(...attr);
+                    else
+                        this.attrs.push(attr);
+                }
+
+                addStyle(style) {
+                    if(Array.isArray(style))
+                        this.styles.push(...style);
+                    else
+                        this.styles.push(style);
+                    
+                }
+
+                addElementStart(element) {
+                    this.elem.prepend(element);
+                }
+
+                addElementEnd(element) {
+                    this.elem.appendChild(element);
+                }
+                
+                creatElement(parent) {
+                    const style = this.styles.join("; ");
+                    let e = document.createElement(this.name);
+                    if(this.styles.length > 0)
+                        e.setAttribute("style", style);
+                    this.attrs.forEach(function(attr) {
+                        let arr = attr.split("=");
+                        e.setAttribute(arr[0], arr[1]);
+                    });
+                    if(!this.selfClosing)
+                        e.innerHTML = this.text;
+                    if(parent)
+                        parent.prepend(e);
+                    this.elem = e;
+                }
+                
+                getHtml() {
+                    return this.elem.outerHTML;
+                }
+
+            }
+
+
+
+
+            //Task 2
+            let wrapper = new HtmlElement("div", false);
+            wrapper.addAttr(["id=wrapper", "class=wrap"]);
+            wrapper.addStyle("display: flex");
+            wrapper.creatElement(document.body);
+
+            let div1 = new HtmlElement("div", false);
+            div1.addStyle(["width: 300px", "margin: 10px"]);
+            div1.creatElement();
+            
+            let h3 = new HtmlElement("h3", false, "What is Lorem Ipsum?");
+            h3.creatElement();
+            div1.addElementStart(h3.elem)
+
+            let img = new HtmlElement("img", true);
+            img.addStyle("width: 100%");
+            img.addAttr(["src=lipsum.jpg", "alt=Lorem Ipsum"]);
+            img.creatElement();
+            div1.addElementEnd(img.elem)
+
+            let p = new HtmlElement("p", false, "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate earum delectus recusandae sunt quo nostrum voluptas illo amet nobis harum.");
+            p.addStyle("text-align: justify");
+            p.creatElement();
+            div1.addElementEnd(p.elem);
+
+            let a = new HtmlElement("a", false, "More...");
+            a.addAttr(["href=link.com", "target=_blank"]);
+            a.creatElement();
+            p.addElementEnd(a.elem);
+
+            wrapper.addElementStart(div1.elem);
+
+            //Task 4 - Css
+            let wrap = new CssClass("wrap");
+            wrap.addStyle("dispaly: flex")
+            wrap.create();
+
+            let block = new CssClass("block");
+            block.addStyle(["width: 300px", "margin: 10px"]);
+            block.create();
+
+            let imgcss = new CssClass("img"); 
+            imgcss.addStyle("width: 300%");
+            imgcss.create();
+
+            let text = new CssClass("text");
+            text.addStyle("text-align: justify");
+            text.create();
+
+            {
+                let div1 = new HtmlElement("div", false);
+                div1.addAttr("class=block");
+                div1.creatElement();
+                
+                let h3 = new HtmlElement("h3", false, "What is Lorem Ipsum?");
+                h3.creatElement();
+                div1.addElementStart(h3.elem)
+
+                let img = new HtmlElement("img", true);
+                img.addAttr(["class=img","src=lipsum.jpg", "alt=Lorem Ipsum"]);
+                img.creatElement();
+                div1.addElementEnd(img.elem)
+
+                let p = new HtmlElement("p", false, "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate earum delectus recusandae sunt quo nostrum voluptas illo amet nobis harum.");
+                p.addAttr("class=text")
+                p.creatElement();
+                div1.addElementEnd(p.elem);
+
+                let a = new HtmlElement("a", false, "More...");
+                a.addAttr(["href=link.com", "target=_blank"]);
+                a.creatElement();
+                p.addElementEnd(a.elem);
+
+                wrapper.addElementStart(div1.elem);
+            }
+            </script>
+    </body>
+</html>

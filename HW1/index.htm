@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>First HW</title>
+
+        <style>
+            input {
+                height: 30px;
+                width: 60px;
+                text-align: left;
+            }
+            div {
+                height: 50px;
+                width: 250px;
+                border: 1px solid #000;
+                border-radius: 5px;
+                background-color: #999;
+                padding: 20px;
+                margin: 20px;
+                text-align: center;
+            }
+            button {height: 36px;}
+            #a1 {background-color: slateblue;}
+            #a2 {background-color: slateblue;}
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <input id="num" type="text" />
+            <button onclick="convert()">convert</button> =
+            <span id="zeronum"></span>
+        </div>
+
+        <div>
+            <input id="a1" type="text" />
+            <button id="btn" onclick="change()">< ></button>
+            <input id="a2" type="text" />
+        </div>
+
+        <script>
+            const num = document.getElementById('num')
+            const zeronum = document.getElementById('zeronum')
+            const a1 = document.getElementById('a1')
+            const a2 = document.getElementById('a2')
+            
+            function convert() {
+                let temp = Number(num.value)
+                if (Number.isInteger(temp)) {
+                    zeronum.textContent = num.value.padStart(4, "0")
+                }
+                else {
+                    zeronum.textContent = num.value.padEnd(4, "0")
+                }
+            }
+
+            function change() {
+                var temp = a1.value;
+                a1.value = a2.value;
+                a2.value = temp;
+            }
+        </script>
+    </body>
+</html>

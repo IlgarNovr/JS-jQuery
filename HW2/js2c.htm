@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>HW2-c</title>
+        <style>
+            div {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            table {
+                border-collapse: collapse;
+                margin: 4em;
+            }
+
+            td {
+                width: 40px;
+                height: 40px;
+                border: 2px solid #333;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <table id="cedvel1"></table>
+            <table id="cedvel2"></table>
+            <table id="cedvel3"></table>
+            <table id="cedvel4"></table>
+            <table id="cedvel5"></table>
+            <table id="cedvel6"></table>
+            <table id="cedvel7"></table>
+        </div>
+        <table id="cedvel8"></table>
+
+        <script>
+            const cedvel1 = document.getElementById("cedvel1")
+            const cedvel2 = document.getElementById("cedvel2")
+            const cedvel3 = document.getElementById("cedvel3")
+            const cedvel4 = document.getElementById("cedvel4")
+            const cedvel5 = document.getElementById("cedvel5")
+            const cedvel6 = document.getElementById("cedvel6")
+            const cedvel7 = document.getElementById("cedvel7")
+            const cedvel8 = document.getElementById("cedvel8")
+
+            //Table-1
+            let kod1 = ''
+            let n1 = 1
+            for (let i = 0; i < 5; i++) {
+                kod1 += '<tr>'
+                for (let j = 0; j < 5; j++) {
+                    kod1 += '<td>' + n1 + '</td>'
+                    n1++
+                }
+                kod1 += '</tr>'
+            }
+            cedvel1.innerHTML = kod1
+
+            //Table-2
+            let kod2 = ''
+            for (let i = 1; i <= 5; i++) {
+                kod2 += '<tr>'
+                for (let j = 1; j <= 5; j++) {
+                    kod2 += !((i + j) % 2) ? '<td>' + 0 + '</td>' : '<td>' + 1 + '</td>'
+                }
+                kod2 += '</tr>'
+            }
+            cedvel2.innerHTML = kod2
+
+            //Table-3
+            let kod3 = ''
+            for (let i = 0; i < 5; i++) {
+                kod3 += '<tr>'
+                for (let j = 1; j <= 5; j++) {
+                    kod3 += '<td>' + (i + j) + '</td>'
+                }
+                kod3 += '</tr>'
+            }
+            cedvel3.innerHTML = kod3
+
+            //Table-4
+            let kod4 = ''
+            for (let i = 1; i <= 5; i++) {
+                kod4 += '<tr>'
+                for (let j = 1; j <= 5; j++) {
+                    kod4 += '<td>' + j + '</td>'
+                }
+                kod4 += '</tr>'
+            }
+            cedvel4.innerHTML = kod4
+
+            //Table-5
+            let kod5 = ''
+            for (let i = 1; i <= 5; i++) {
+                kod5 += '<tr>'
+                for (let j = 1; j <= 5; j++) {
+                    kod5 += j - i <= 0 ? '<td>' + j + '</td>' : '<td></td>'
+                }
+                kod5 += '</tr>'
+            }
+            cedvel5.innerHTML = kod5
+
+            //Table-6
+            let kod6 = ''
+            for (let i = 1; i <= 5; i++) {
+                kod6 += '<tr>'
+                for (let j = 1; j <= 5; j++) {
+                    kod6 += j % 2 ? '<td>' + j + '</td>' : '<td></td>'
+                }
+                kod6 += '</tr>'
+            }
+            cedvel6.innerHTML = kod6
+
+            //Table-7
+            let kod7 = ''
+            let n7 = 1
+            for (let i = 1; i <= 5; i++) {
+                kod7 += '<tr>'
+                for (let j = 1; j <= 5; j++) {
+                    kod7 += !((i + j) % 2) ? '<td>' + n7 + '</td>' : '<td></td>'
+                    n7++
+
+                }
+                kod7 += '</tr>'
+            }
+            cedvel7.innerHTML = kod7
+
+            //Table-8
+            let kod8 = ""
+            let n8 = 0
+            for (let i = 0; i < 7; i++) {
+                kod8 += "<tr>"
+                n8 = 1;
+                for (let j = 0; j < 7; j++) {
+                    kod8 += "<td>"
+                    if ((i * 2 <= j + i && j + i <= 6) || (i * 2 >= j + i && j + i >= 6)) {
+                        kod8 += n8;
+                        if (j < 3)
+                            n8++
+                        else
+                            n8--
+                    }
+                    kod8 += "</td>"
+                }
+                kod8 + "</tr>"
+            }
+            cedvel8.innerHTML = kod8;
+        </script>
+    </body>
+</html>

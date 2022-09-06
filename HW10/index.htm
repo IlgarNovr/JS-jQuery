@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+        <title>Navbar</title>
+    </head>
+    <body style="margin: 0">
+        <div id="nav"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            let navItem = ["Home", "Photos", "About", "Contact"]
+            let isMenuOpen = false
+
+            const nav = $("#nav")
+            nav
+                .css({
+                    background:"pink",
+                    boxShadow: "0 1px  10px #888"
+                })
+                .append("<div id='hamBtn'>☰</div>")
+                .append("<ul id='navElem'></ul>")
+
+            const navElem = $("#navElem")
+            const hamBtn = $("#hamBtn")
+                
+            navItem.forEach((item) => {
+                navElem.append(`<li>${item}</li>`)
+            })
+            
+            navElem
+                .css({
+                   display: "flex",
+                   font: `1.3em Arial, sans-serif`,
+                   color: "#999",
+                   listStyleType: "none",
+                   margin: 0
+                })
+                .children() 
+                .css({
+                    padding: `10px 20px`
+                })
+                .hover(function(e) {
+                    $(this).css("color", e.type === "mouseenter" ? "#222":"#888")
+                })
+
+            hamBtn
+                .css({
+                    fontSize: "1.9em",
+                    color: "#888",
+                    padding: "10px 30px"
+                })
+                .click(function() {
+                    navElem.slideToggle(300, () => {
+                        isMenuOpen = !isMenuOpen
+                        hamBtn.text(isMenuOpen ? "🗙" : "☰")
+                    })
+                })
+
+
+            windowSize()
+
+            $(window).resize(function() {
+                windowSize()
+            })
+
+            function mobile() {
+                hamBtn.text("☰")
+                navElem.css({
+                    flexDirection: "column",
+                    padding: "10px"
+                })
+                navElem.hide()
+                hamBtn.css("display", "inline-block")
+            }
+            
+            function desktop() {
+                hamBtn.text("☰")
+                navElem.show();
+                navElem.css({
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                    padding: "10px 40px"
+                })
+                hamBtn.css("display", "none")
+            }
+
+            function windowSize() {
+                isMenuOpen = false
+                if(window.matchMedia('(max-width: 768px)').matches) mobile()
+                else desktop()
+            }
+
+        </script>
+    </body>
+</html>
